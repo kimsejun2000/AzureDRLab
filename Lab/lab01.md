@@ -33,7 +33,7 @@ Lab files:
 1. In the Cloud Shell pane, run the following in order to deploy a Standard_DS2_v3 Azure VM (substitute the &lt;location&gt; placeholder with the name of the Azure region where you want to perform deployment):
 
    ```pwsh
-   ./az-101-01b_azuredeploy.ps1 -resourceGroupName 'az1010101b-RG' -resourceGroupLocation <location>
+   ./azuredeploy.ps1 -resourceGroupName 'dr-lab-rg-xx' -resourceGroupLocation <location>
    ```
 
    > **Note**: To identify Azure regions where you can provision Azure VMs, refer to [**https://azure.microsoft.com/en-us/regions/offers/**](https://azure.microsoft.com/en-us/regions/offers/)
@@ -41,26 +41,26 @@ Lab files:
    > **Note**: If the deployment fails due to the Standard_DS2_v3 size not being available, identify another Azure VM size that supports nested virtualization and specify this size explicitly during the deployment by using the following syntax (substitute the &lt;vm_Size&gt; placeholder with the intended Azure VM size)
 
    ```pwsh
-   .\az-101-01b_azuredeploy.ps1 -resourceGroupName 'az1010101b-RG' -resourceGroupLocation <location> -vmSize <vm_Size>
+   .\azuredeploy.ps1 -resourceGroupName 'dr-lab-rg-xx' -resourceGroupLocation <location> -vmSize <vm_Size>
    ```
 
-   > **Note**: Do not wait for the deployment to complete but proceed to the next task. You will use the virtual machine **az1010101b-vm1** in the next exercise of this lab.
+   > **Note**: Do not wait for the deployment to complete but proceed to the next task. You will use the virtual machine **dr-lab-vm1** in the next exercise of this lab.
 
 ## Task 2: Implement an Azure Site Recovery vault
  
 1. In the Azure portal, navigate to the **New** blade.
 
-1. From the **New** blade, search Azure Marketplace for **Backup and Site Recovery (OMS)**.
+1. From the **New** blade, search Azure Marketplace for **ecovery Services vault**.
 
 1. Use the list of search results to navigate to the **Recovery Services vault** blade.
 
 1. Use the **Recovery Services vault** blade, to create a Site Recovery vault with the following settings:
 
-    - Name: **vaultaz1010102bb**
+    - Name: **dr-lab-vault-xx**
 
     - Subscription: the same Azure subscription you used in the previous task of this exercise
 
-    - Resource group: the name of a new resource group **az1010102b-RG**
+    - Resource group: the name of a new resource group **dr-lab-rg-xx**
 
     - Location: the same Azure region that you selected in the previous task of this exercise.
 
@@ -70,9 +70,9 @@ Lab files:
 
    > **Note**: Before you start this task, ensure that the template deployment you started in the first exercise has completed. 
 
-1. In the Azure portal, navigate to the blade of the **az1010101b-vm1** Azure VM. 
+1. In the Azure portal, navigate to the blade of the **dr-lab-vm1** Azure VM. 
 
-1. From the **Overview** pane of the **az1010101b-vm1** blade, generate an RDP file and use it to connect to **az1010101b-vm1**.
+1. From the **Overview** pane of the **dr-lab-vm1** blade, generate an RDP file and use it to connect to **dr-lab-vm1**.
 
 1. When prompted, authenticate by specifying the following credentials:
 
@@ -80,13 +80,13 @@ Lab files:
 
     - Password: **Pa55w.rd1234**
 
-1. Within the RDP session to **az1010101b-vm1**, start Hyper-V Manager.
+1. Within the RDP session to **dr-lab-vm1**, start Hyper-V Manager.
 
 1. In the Hyper-V Manager console, use Virtual Switch Manager to create an internal switch named **Internal**. 
 
 1. In the Hyper-V Manager console, use New Virtual Machine Wizard to create a Hyper-V VM with the following settings:
 
-    - Name: **az1010101b-vm2**
+    - Name: **dr-lab-vm2**
 
     - Generation: **1**
 
@@ -96,7 +96,7 @@ Lab files:
 
     - Create a virtual disk: 
 
-        - Name: **az1010101b-vm2.vhdx**
+        - Name: **dr-lab-vm2.vhdx**
 
         - Location: **C:\\Users\\Public\\Documents\\Hyper-V\\Virtual Hard Disks\\**
 
@@ -113,11 +113,11 @@ Lab files:
 
 1. Within the RDP session, start Internet Explorer, browse to the Azure portal at [**http://portal.azure.com**](http://portal.azure.com) and sign in by using the same Microsoft account you used previously in this lab.
 
-1. In the Azure portal, navigate to the **az1010102b-RG** resource group blade.
+1. In the Azure portal, navigate to the **dr-lab-rg-xx** resource group blade.
 
-1. From the **az1010102b-RG** resource group blade, navigate to the **vaultaz1010102b** Recovery Services vault blade.
+1. From the **dr-lab-rg-xx** resource group blade, navigate to the **vdr-lab-vault-xx** Recovery Services vault blade.
 
-1. From the **vaultaz1010102b** blade, navigate to the **Site Recovery infrastructure** blade.
+1. From the **vdr-lab-vault-xx** blade, navigate to the **Site Recovery infrastructure** blade.
 
 1. From the **Site Recovery infrastructure** blade, navigate to the **Site Recovery infrastructure - Hyper-V Sites** blade.
 
@@ -141,11 +141,11 @@ Lab files:
 
 1. Verify that the subscription, vault name, and Hyper-V site name are correct and complete the registration.
 
-1. Switch back to the Azure portal, navigate to the **Site Recovery infrastructure - Hyper-V Hosts** blade, and verify that the **az1010102b-vm1** appears on the list of servers with the **Connected** status.
+1. Switch back to the Azure portal, navigate to the **Site Recovery infrastructure - Hyper-V Hosts** blade, and verify that the **asr-lab-vm1** appears on the list of servers with the **Connected** status.
 
-1. From the **Site Recovery infrastructure - Hyper-V Hosts** blade, navigate to the **vaultaz1010102b - Site Recovery** blade.
+1. From the **Site Recovery infrastructure - Hyper-V Hosts** blade, navigate to the **vdr-lab-vault-xx - Site Recovery** blade.
 
-1. From the **vaultaz1010102b - Site Recovery** blade, navigate to the **Prepare Infrastructure** blade and specify the following settings:
+1. From the **vdr-lab-vault-xx - Site Recovery** blade, navigate to the **Prepare Infrastructure** blade and specify the following settings:
 
     - Protection goal:
 
@@ -165,7 +165,7 @@ Lab files:
 
         - Step 1: Select Hyper-V Site: **Adatum Hyper-V Site**
 
-        - Step 2: Ensure Hyper-V servers are added: **az1010102b-vm1**
+        - Step 2: Ensure Hyper-V servers are added: **asr-lab-vm1**
 
     - Target: 
 
@@ -177,13 +177,13 @@ Lab files:
 
         - Step 2: Ensure that at least one compatible Azure storage account exists:
 
-            - Use the **+ Storage account** option to create a **Storage (general purpose v1)** **Standard** storage account with **Locally-redundant storage (LRS)** replication settings.
+            - Use the **+ Storage account** option to create a **Storage (general purpose v2)** **Standard** storage account with **Locally-redundant storage (LRS)** replication settings.
 
       > **Note**: The new storage account will be automatically created in the same resource group as the Azure Site Recovery vault.
 
         - Step 3: Ensure that at least one compatible Azure virtual network exists: 
 
-            - Use the **+ Network** option to create a virtual network named **az-1010102b-vnet2** with the address space of **10.201.16.0/20**, a subnet named **subnet0**, and the subnet range of **10.201.16.0/24**.
+            - Use the **+ Network** option to create a virtual network named **asr-lab-vnet2** with the address space of **10.201.16.0/20**, a subnet named **subnet0**, and the subnet range of **10.201.16.0/24**.
 
       > **Note**: The new virtual network will be automatically created in the same resource group as the Azure Site Recovery vault.
 
@@ -214,11 +214,11 @@ Lab files:
 
 ## Task 5: Enable Hyper-V VM replication
 
-1. Within the RDP session, in the Azure portal, navigate to the **vaultaz1010102b** blade.
+1. Within the RDP session, in the Azure portal, navigate to the **vdr-lab-vault-xx** blade.
 
-1. From the **vaultaz1010102b** blade, navigate to the **vaultaz1010102b - Replicated items** blade.
+1. From the **vdr-lab-vault-xx** blade, navigate to the **vdr-lab-vault-xx - Replicated items** blade.
 
-1. From the **vaultaz1010102b - Replicated items** blade, navigate to the **Enable replication** blade and enable Hyper-V VM replication with the following settings:
+1. From the **vdr-lab-vault-xx - Replicated items** blade, navigate to the **Enable replication** blade and enable Hyper-V VM replication with the following settings:
 
     - Source:
 
@@ -232,7 +232,7 @@ Lab files:
 
         - Subscription: the same subscription you selected earlier in this lab
 
-        - Post-failover resource group: **az1010102b-RG**
+        - Post-failover resource group: **dr-lab-rg-xx**
 
         - Post-failover deployment model: **Resource Manager**
 
@@ -240,13 +240,13 @@ Lab files:
 
         - Azure network: **Configure now for selected virtual machines**
 
-        - Post-failover virtual network: **az-1010102b-vnet2**
+        - Post-failover virtual network: **asr-lab-vnet2**
 
         - Subnet: **subnet0 (10.201.16.0/24)**
 
     - Select virtual machines: 
 
-        - **az1010101b-vm2**
+        - **dr-lab-vm2**
 
     - Configure properties: 
 
@@ -258,11 +258,11 @@ Lab files:
 
             - DISK TO REPLICATE: **Need to select per VM.**
 
-        - az1010101b-vm2:
+        - dr-lab-vm2:
 
             - OS TYPE: **Windows**
 
-            - OS DISK: **az1010101b-vm2**
+            - OS DISK: **dr-lab-vm2**
 
             - DISK TO REPLICATE: **All Disks [1]**
 
@@ -275,14 +275,14 @@ Lab files:
 
 ## Task 6: Review Hyper-V VM replication settings
 
-1. Within the RDP session, in the Azure portal, on the **vaultaz1010102b - Replicated items** blade, ensure that there is an entry representing the **az1010101b-vm2** Azure VM and verify that its **REPLICATION HEALTH** is **Healthy**.
+1. Within the RDP session, in the Azure portal, on the **vdr-lab-vault-xx - Replicated items** blade, ensure that there is an entry representing the **dr-lab-vm2** Azure VM and verify that its **REPLICATION HEALTH** is **Healthy**.
 
    > **Note**: You might need to refresh the view of the page in order to view the replicated VM. 
 
 1. Monitor the **STATUS** column and wait until it changes to **Protected**. 
 
-1. From the **vaultaz1010102b - Replicated items** blade, navigate to the replicated item blade of the **vaultaz1010102b** Hyper-V VM.
+1. From the **vdr-lab-vault-xx - Replicated items** blade, navigate to the replicated item blade of the **vdr-lab-vault-xx** Hyper-V VM.
 
-1. On the **az1010101b-vm** replicated item blade, review the **Health and status**, **Failover readiness**, **Latest recovery points**, and **Infrastructure view** sections. Note the **Planned Failover**, **Failover** and **Test Failover** toolbar icons.
+1. On the **dr-lab-vm** replicated item blade, review the **Health and status**, **Failover readiness**, **Latest recovery points**, and **Infrastructure view** sections. Note the **Planned Failover**, **Failover** and **Test Failover** toolbar icons.
 
 > **Result**: After you completed this exercise, you have provisioned a Hyper-V VM, prepared infrastructure for Hyper-V VM replication, configure Hyper-V VM replication, and reviewed Hyper-V VM replication settings.
