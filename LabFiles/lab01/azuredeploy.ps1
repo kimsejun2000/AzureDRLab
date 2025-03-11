@@ -6,9 +6,9 @@ Param(
     [Parameter(Mandatory=$false,Position=3)]
         [Boolean]$uploadArtifacts = $true,
     [Parameter(Mandatory=$false,Position=4)]
-        [String]$templateFilePath = 'az-101-01b_azuredeploy.json',
+        [String]$templateFilePath = 'azuredeploy.json',
     [Parameter(Mandatory=$false,Position=5)]
-        [String]$templateParametersFilePath = 'az-101-01b_azuredeploy.parameters.json',
+        [String]$templateParametersFilePath = 'azuredeploy.parameters.json',
     [Parameter(Mandatory=$false,Position=6)]
         [String]$ArtifactStagingDirectoryPath = 'staging',
     [Parameter(Mandatory=$false,Position=7)]
@@ -16,7 +16,7 @@ Param(
     [Parameter(Mandatory=$false,Position=8)]
         [String]$nestedTemplatesPath = 'nestedtemplates',
     [Parameter(Mandatory=$false,Position=9)]
-        [String]$vmSize = 'Standard_D2_v3'
+        [String]$vmSize = 'Standard_D2_v5'
 )
 
 $rgDoesNotExist = $true
