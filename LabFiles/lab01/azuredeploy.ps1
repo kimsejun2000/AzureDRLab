@@ -16,7 +16,7 @@ Param(
     [Parameter(Mandatory=$false,Position=8)]
         [String]$nestedTemplatesPath = 'nestedtemplates',
     [Parameter(Mandatory=$false,Position=9)]
-        [String]$vmSize = 'Standard_D2_v5'
+        [String]$vmSize = 'Standard_D2s_v4'
 )
 
 $rgDoesNotExist = $true
