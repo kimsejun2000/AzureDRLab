@@ -115,9 +115,9 @@ Lab files:
 
 1. In the Azure portal, navigate to the **dr-lab-rg-xx** resource group blade.
 
-1. From the **dr-lab-rg-xx** resource group blade, navigate to the **vdr-lab-vault-xx** Recovery Services vault blade.
+1. From the **dr-lab-rg-xx** resource group blade, navigate to the **dr-lab-vault-xx** Recovery Services vault blade.
 
-1. From the **vdr-lab-vault-xx** blade, navigate to the **Site Recovery infrastructure** blade.
+1. From the **dr-lab-vault-xx** blade, navigate to the **Site Recovery infrastructure** blade.
 
 1. From the **Site Recovery infrastructure** blade, navigate to the **Site Recovery infrastructure - Hyper-V Sites** blade.
 
@@ -143,9 +143,9 @@ Lab files:
 
 1. Switch back to the Azure portal, navigate to the **Site Recovery infrastructure - Hyper-V Hosts** blade, and verify that the **asr-lab-vm1** appears on the list of servers with the **Connected** status.
 
-1. From the **Site Recovery infrastructure - Hyper-V Hosts** blade, navigate to the **vdr-lab-vault-xx - Site Recovery** blade.
+1. From the **Site Recovery infrastructure - Hyper-V Hosts** blade, navigate to the **dr-lab-vault-xx - Site Recovery** blade.
 
-1. From the **vdr-lab-vault-xx - Site Recovery** blade, navigate to the **Prepare Infrastructure** blade and specify the following settings:
+1. From the **dr-lab-vault-xx - Site Recovery** blade, navigate to the **Prepare Infrastructure** blade and specify the following settings:
 
     - Protection goal:
 
@@ -214,11 +214,11 @@ Lab files:
 
 ## Task 5: Enable Hyper-V VM replication
 
-1. Within the RDP session, in the Azure portal, navigate to the **vdr-lab-vault-xx** blade.
+1. Within the RDP session, in the Azure portal, navigate to the **dr-lab-vault-xx** blade.
 
-1. From the **vdr-lab-vault-xx** blade, navigate to the **vdr-lab-vault-xx - Replicated items** blade.
+1. From the **dr-lab-vault-xx** blade, navigate to the **dr-lab-vault-xx - Replicated items** blade.
 
-1. From the **vdr-lab-vault-xx - Replicated items** blade, navigate to the **Enable replication** blade and enable Hyper-V VM replication with the following settings:
+1. From the **dr-lab-vault-xx - Replicated items** blade, navigate to the **Enable replication** blade and enable Hyper-V VM replication with the following settings:
 
     - Source:
 
@@ -275,13 +275,13 @@ Lab files:
 
 ## Task 6: Review Hyper-V VM replication settings
 
-1. Within the RDP session, in the Azure portal, on the **vdr-lab-vault-xx - Replicated items** blade, ensure that there is an entry representing the **dr-lab-vm2** Azure VM and verify that its **REPLICATION HEALTH** is **Healthy**.
+1. Within the RDP session, in the Azure portal, on the **dr-lab-vault-xx - Replicated items** blade, ensure that there is an entry representing the **dr-lab-vm2** Azure VM and verify that its **REPLICATION HEALTH** is **Healthy**.
 
    > **Note**: You might need to refresh the view of the page in order to view the replicated VM. 
 
 1. Monitor the **STATUS** column and wait until it changes to **Protected**. 
 
-1. From the **vdr-lab-vault-xx - Replicated items** blade, navigate to the replicated item blade of the **vdr-lab-vault-xx** Hyper-V VM.
+1. From the **dr-lab-vault-xx - Replicated items** blade, navigate to the replicated item blade of the **dr-lab-vault-xx** Hyper-V VM.
 
 1. On the **dr-lab-vm** replicated item blade, review the **Health and status**, **Failover readiness**, **Latest recovery points**, and **Infrastructure view** sections. Note the **Planned Failover**, **Failover** and **Test Failover** toolbar icons.
 
