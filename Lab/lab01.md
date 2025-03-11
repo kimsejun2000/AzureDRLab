@@ -50,7 +50,7 @@ Lab files:
  
 1. In the Azure portal, navigate to the **New** blade.
 
-1. From the **New** blade, search Azure Marketplace for **ecovery Services vault**.
+1. From the **New** blade, search Azure Marketplace for **Recovery Services vault**.
 
 1. Use the list of search results to navigate to the **Recovery Services vault** blade.
 
